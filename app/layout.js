@@ -16,18 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
-        <AuthContextProvider>
-          <div className="container mx-auto px-1 relative rounded-md ">
-            <div className="flex min-h-screen flex-col">
-              <Heading />
-              <div className="flex-1 flex min-h-[calc(100vh - var(--theme-spacing-14))] w-full overflow-hidden">
-                <Navbar />
-                {children}
-              </div>
-            </div>
-            <Footer />
-          </div>
-        </AuthContextProvider>
+        <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </html>
   );
