@@ -12,6 +12,9 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        borel: ["Borel", "sans-serif"],
+      },
       chart: {
         "bar-chart": {
           width: "100%",
@@ -21,4 +24,8 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark", "cupcake", "synthwave"],
+  },
 };

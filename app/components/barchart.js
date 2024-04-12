@@ -8,7 +8,6 @@ export default function BarChart({ data, categories }) {
 
   useEffect(() => {
     if (data) {
-      //   const labels = Object.keys(data);
       const labels = categories;
       const values = Object.values(data);
 
@@ -19,7 +18,7 @@ export default function BarChart({ data, categories }) {
       }
 
       chartInstance.current = new Chart(ctx, {
-        type: "bar",
+        type: "line",
         data: {
           labels: labels,
           datasets: [
@@ -36,6 +35,22 @@ export default function BarChart({ data, categories }) {
           scales: {
             y: {
               beginAtZero: true,
+              ticks: {
+                callback: function (value) {
+                  return `$${parseFloat(value).toFixed(2)}`;
+                },
+              },
+            },
+          },
+          plugins: {
+            // Configure the tooltip to display dollar signs and formatted numbers
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  const amount = context.dataset.data[context.dataIndex];
+                  return `$${parseFloat(amount).toFixed(2)}`;
+                },
+              },
             },
           },
         },

@@ -11,21 +11,40 @@ export default function NewTransaction({
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
 
+  const categories = [
+    "Groceries",
+    "Dining Out",
+    "Utilities",
+    "Rent",
+    "Transportation",
+    "Health",
+    "Entertainment",
+    "Education",
+    "Miscellaneous",
+    "Travel",
+    "Other",
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newId = Math.floor(Math.random() * 10000);
+    const adjustedDate = new Date(date);
+    adjustedDate.setDate(adjustedDate.getDate() + 1);
 
     const newTransaction = {
-      date: new Date(date),
+      id: newId,
+      date: adjustedDate,
       description,
       category,
       amount: parseFloat(amount).toFixed(2),
     };
+
     onAddTransaction(newTransaction);
 
     setDate("");
     setDescription("");
     setCategory("");
-    setAmount("");
+    setAmount(0);
 
     onCloseTransaction();
   };
@@ -73,6 +92,23 @@ export default function NewTransaction({
             />
           </label>
 
+          <label className="block mb-4 ">
+            <span className="text-gray-800">Category:</span>
+            <select
+              required
+              onChange={handleCategoryChange}
+              value={category}
+              className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+            >
+              <option value="">Select a category</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <label className="block mb-4">
             <span className="text-gray-800">Description:</span>
             <textarea
@@ -83,20 +119,12 @@ export default function NewTransaction({
               rows="3"
             />
 
-            <label className="block mb-4 ">
-              <span className="text-gray-800">Category:</span>
-              <input
-                required
-                onChange={handleCategoryChange}
-                value={category}
-                className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
-              />
-            </label>
-
             <label className="block mb-4">
               <span className="text-gray-800">Amount:</span>
               <input
                 required
+                type="number"
+                min="0.00"
                 onChange={handleAmountChange}
                 value={amount}
                 className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"

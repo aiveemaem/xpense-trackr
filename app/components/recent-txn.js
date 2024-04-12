@@ -1,6 +1,7 @@
 "use client";
 import transData from "../trans-list.json";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function RecentTxn() {
   let transactions = transData.map((txn) => ({
@@ -17,7 +18,12 @@ export default function RecentTxn() {
       <div className="bg-white border border-gray-100 rounded-lg shadow-md p-6 w-full">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Recent Transactions</h2>
-          <Link href="./transactions" className="text-blue-500 hover:underline">
+          {/* {user && ( */}
+          <Link
+            href="../pages/transactions"
+            className="text-blue-500 hover:underline"
+            onClick={() => setActivePage("transactions")}
+          >
             View All
           </Link>
         </div>
