@@ -61,10 +61,9 @@ export const deleteTransaction = async (userId, itemId) => {
   console.log("User id: ", userId);
   console.log("Transaction id: ", itemId);
   try {
-    const transRef = doc(db, "users", userId, "items", itemId);
-    console.log("User id ", userId);
-    console.log("Transaction id ", itemId);
-    await deleteDoc(transRef);
+    const itemRef = doc(db, "users", userId, "items", itemId);
+    await deleteDoc(itemRef);
+    return itemId;
   } catch (error) {
     console.log("Error deleting transaction (service): ", error);
   }

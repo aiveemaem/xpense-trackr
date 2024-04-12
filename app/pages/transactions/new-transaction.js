@@ -27,12 +27,12 @@ export default function NewTransaction({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newId = Math.floor(Math.random() * 10000);
+    // const newId = Math.floor(Math.random() * 10000);
     const adjustedDate = new Date(date);
     adjustedDate.setDate(adjustedDate.getDate() + 1);
 
     const newTransaction = {
-      id: newId,
+      // id,
       date: adjustedDate,
       description,
       category,
@@ -68,7 +68,7 @@ export default function NewTransaction({
   return (
     // <main>
     <div
-      className=" absolute w-full h-full backdrop-filter backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50  "
+      className=" absolute top-0 left-0 h-screen w-screen backdrop-filter backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50"
       onClick={onCloseTransaction}
     >
       <div
@@ -124,7 +124,8 @@ export default function NewTransaction({
               <input
                 required
                 type="number"
-                min="0.00"
+                min="0"
+                step="0.01"
                 onChange={handleAmountChange}
                 value={amount}
                 className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"

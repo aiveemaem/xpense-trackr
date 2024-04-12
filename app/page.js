@@ -1,10 +1,9 @@
 "use client";
 
-import HomePage from "./pages/home/page";
-import Navbar from "./components/navbar";
 import { useUserAuth } from "./_utils/auth-context";
-import Heading from "./components/heading";
+import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import Status from "./pages/home/status";
 
 export default function Page() {
   const { user, gitHubSignIn, googleSignIn, firebaseSignOut } = useUserAuth();
@@ -36,19 +35,30 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className="hero flex-1 bg-base-200 ">
+      <main className="hero flex-1 bg-base-200">
         {user ? (
-          <>
-            {/* <div className="w-full md:w-1/4 ">
-              <Navbar />
-            </div> */}
-            <HomePage />
-          </>
+          <div className="flex flex-col items-center text-center p-4 sm:p-6 md:p-8 lg:p-12 space-y-4 sm:space-y-6 md:space-y-8 bg-base-100 rounded-lg shadow-md">
+            <h1 className="text-5xl font-bold mb-6 text-primary">Welcome!</h1>
+            <div className="flex flex-row items-center space-x-4">
+              <img
+                src={user.photoURL}
+                alt="User profile"
+                className="rounded-full w-24 h-24 shadow-sm "
+              />
+              <span className="text-xl text-neutral font-medium">
+                {user.displayName}
+              </span>
+            </div>
+
+            <span className="text-lg text-gray-500">{user.email}</span>
+            <div className="w-full mt-6">
+              <Status />
+            </div>
+          </div>
         ) : (
           <div className="hero-content text-center">
             <div className="max-w-lg">
-              <h1 className="text-5xl font-bold">Welcome</h1>
-
+              <h1 className="text-5xl font-bold">WELCOME</h1>
               <p className="py-4 italic">
                 Xpense Trackr is a free web-based tool that helps you monitor
                 your expenses and manage your finances efficiently.

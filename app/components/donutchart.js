@@ -2,9 +2,8 @@
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto"; // Import Chart.js library
 
-export default function BarChart({ data, categories }) {
+export default function DonutChart({ data, categories }) {
   const chartRef = useRef(null);
-
   const chartInstance = useRef(null);
 
   useEffect(() => {
@@ -18,33 +17,29 @@ export default function BarChart({ data, categories }) {
       }
 
       chartInstance.current = new Chart(ctx, {
-        type: "bar",
+        type: "doughnut",
         data: {
           labels: labels,
           datasets: [
             {
               label: "Categories",
               data: values,
-              backgroundColor: "rgba(54, 162, 235, 0.5)",
-              hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
-              borderColor: "rgba(54, 162, 235, 1)",
+              backgroundColor: [
+                "rgba(54, 162, 235, 0.7)",
+                "rgba(255, 99, 132, 0.7)",
+                "rgba(255, 205, 86, 0.7)",
+                "rgba(75, 192, 192, 0.7)",
+                "rgba(153, 102, 255, 0.7)",
+                "rgba(255, 159, 64, 0.7)",
+              ], // Customize colors for each slice
+              borderColor: "#fff",
               borderWidth: 1,
             },
           ],
         },
         options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: {
-                callback: function (value) {
-                  return `$${parseFloat(value).toFixed(2)}`;
-                },
-              },
-            },
-          },
+          maintainAspectRatio: false, // Disable maintaining aspect ratio
           plugins: {
-            // Configure the tooltip to display dollar signs and formatted numbers
             tooltip: {
               callbacks: {
                 label: function (context) {
@@ -59,5 +54,5 @@ export default function BarChart({ data, categories }) {
     }
   }, [data, categories]);
 
-  return <canvas ref={chartRef} />;
+  return <canvas ref={chartRef} width="400" height="400" />;
 }

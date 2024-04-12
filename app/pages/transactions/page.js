@@ -9,11 +9,11 @@ import {
 import { useUserAuth } from "../../_utils/auth-context";
 import Transactions from "../../components/transactions.js";
 import NewTransaction from "./new-transaction";
+import NavBar from "../../components/navbar";
+import Footer from "../../components/footer";
 
 export default function TransactionPage() {
   const { user } = useUserAuth();
-  const [searchQuery, setSearchQuery] = useState("");
-
   const [transaction, setTransactions] = useState([]);
   const [openTransaction, setOpenTransaction] = useState(false); // 2
 
@@ -23,22 +23,22 @@ export default function TransactionPage() {
     setTransactions([...transaction, { id: id, ...txn }]);
   };
 
-  async function loadTransactions() {
-    const fetchedTransactions = await getTransactions(user.uid);
-    setTransactions(fetchedTransactions);
-  }
-
-  const handleDeleteTransaction = async (itemId) => {
+  const handleDeleteTransaction = async (itemId, event) => {
+    event.stopPropagation();
     try {
       await deleteTransaction(user.uid, itemId);
-
       setTransactions(transaction.filter((txn) => txn.id !== itemId));
-      console.log(itemId);
+      console.log("Item id: ", itemId);
       alert("Transaction deleted successfully");
     } catch (error) {
       console.error("Error deleting transaction: ", error);
     }
   };
+
+  async function loadTransactions() {
+    const fetchedTransactions = await getTransactions(user.uid);
+    setTransactions(fetchedTransactions);
+  }
 
   const handleCloseTransaction = () => {
     setOpenTransaction(false);
@@ -51,34 +51,48 @@ export default function TransactionPage() {
   }, [user]);
 
   return (
-    <main className=" w-full flex justify-center border-l-2">
-      <div className="flex-1 flex flex-col gap-4 p-2 md:gap-8 md:p-10 relative">
-        <div className="flex justify-end ">
-          {/* <input
-            type="text"
-            placeholder="Search transactions..."
-            value={searchQuery}
-            onChange={handleSearch}
-            className="border border-gray-300 px-4 py-2 rounded-md mr-4  md:w-2/3"
-          /> */}
-          <button
-            className=" btn btn-primary"
-            onClick={() => setOpenTransaction(true)}
-          >
-            Add Transaction
-          </button>
-        </div>
-        {openTransaction && (
-          <NewTransaction
-            onAddTransaction={handleAddTransaction}
-            onCloseTransaction={handleCloseTransaction}
+    <div className="flex flex-col min-h-screen items-center">
+      <NavBar />
+      <main className="flex-1 w-full py-4 px-4 md:px-8 bg-base-200">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-center">
+            <h2 className="text-xl font-semibold mt-4">TRANSACTIONS</h2>
+
+            <div className="fixed bottom-32 right-8 md:bottom-24 md:right-10 lg:bottom-24 lg:right-10">
+              <button
+                className="btn btn-circle btn-primary  w-16 h-16 md:w-20 md:h-20"
+                onClick={() => setOpenTransaction(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="h-8 w-8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 4v16m8-8H4"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          {openTransaction && (
+            <NewTransaction
+              onAddTransaction={handleAddTransaction}
+              onCloseTransaction={handleCloseTransaction}
+            />
+          )}
+          <Transactions
+            transactions={transaction}
+            onDelete={handleDeleteTransaction}
           />
-        )}
-        <Transactions
-          transactions={transaction}
-          onDelete={handleDeleteTransaction}
-        />
-      </div>
-    </main>
+        </div>
+      </main>
+      <Footer className="mt-auto" />
+    </div>
   );
 }

@@ -2,33 +2,33 @@
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto"; // Import Chart.js library
 
-export default function BarChart({ data, categories }) {
-  const chartRef = useRef(null);
-
-  const chartInstance = useRef(null);
+export default function LineChart({ monthlyData, months }) {
+  const monthlyChartRef = useRef(null);
+  const monthlyChartInstance = useRef(null);
 
   useEffect(() => {
-    if (data) {
-      const labels = categories;
-      const values = Object.values(data);
-      const ctx = chartRef.current.getContext("2d");
+    if (monthlyData) {
+      const labels = months;
+      const values = Object.values(monthlyData);
+      const ctx = monthlyChartRef.current.getContext("2d");
 
-      if (chartInstance.current !== null) {
-        chartInstance.current.destroy(); // Destroy the previous chart instance if it exists
+      if (monthlyChartInstance.current !== null) {
+        monthlyChartInstance.current.destroy(); // Destroy the previous chart instance if it exists
       }
 
-      chartInstance.current = new Chart(ctx, {
-        type: "bar",
+      monthlyChartInstance.current = new Chart(ctx, {
+        type: "line",
         data: {
           labels: labels,
           datasets: [
             {
-              label: "Categories",
+              label: "Monthly Expenses",
               data: values,
-              backgroundColor: "rgba(54, 162, 235, 0.5)",
-              hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
-              borderColor: "rgba(54, 162, 235, 1)",
+              backgroundColor: "rgba(255, 99, 132, 0.5)", // Different color for monthly chart
+              hoverBackgroundColor: "rgba(255, 99, 132, 0.8)",
+              borderColor: "rgba(255, 99, 132, 1)",
               borderWidth: 1,
+              fill: true,
             },
           ],
         },
@@ -44,7 +44,6 @@ export default function BarChart({ data, categories }) {
             },
           },
           plugins: {
-            // Configure the tooltip to display dollar signs and formatted numbers
             tooltip: {
               callbacks: {
                 label: function (context) {
@@ -57,7 +56,7 @@ export default function BarChart({ data, categories }) {
         },
       });
     }
-  }, [data, categories]);
+  }, [monthlyData, months]);
 
-  return <canvas ref={chartRef} />;
+  return <canvas ref={monthlyChartRef} className="mt-4" />;
 }
