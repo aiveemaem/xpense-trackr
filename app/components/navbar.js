@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useUserAuth } from "../_utils/auth-context";
 import { themeChange } from "theme-change";
 
@@ -17,9 +17,9 @@ export default function NavBar() {
     }
   }
 
-  // useEffect(() => {
-  //   themeChange(false);
-  // }, []);
+  useEffect(() => {
+    themeChange(false);
+  }, []);
 
   return (
     <div className="navbar bg-base-100">
@@ -76,7 +76,7 @@ export default function NavBar() {
         <a className="btn btn-ghost text-4xl">XPENSE TRACKR</a>
       </div>
       {user ? (
-        <div className="navbar-end hidden lg:flex">
+        <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-2 text-xl">
             <li aria-label="Home Page">
               <Link href="/pages/home" className="">
@@ -96,6 +96,84 @@ export default function NavBar() {
           </ul>
         </div>
       ) : null}
+      <div className="navbar-end">
+        <div className="dropdown  ">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn m-1 dropdown-toggle"
+            aria-label="Theme Selector"
+            onClick={(e) => e.currentTarget.focus()}
+          >
+            Theme
+            <svg
+              width="12px"
+              height="12px"
+              className="h-2 w-2 fill-current opacity-60 inline-block"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 2048 2048"
+            >
+              <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content absolute z-10 p-2 shadow-2xl bg-base-300 rounded-box"
+            id="dropdownMenu"
+          >
+            <li>
+              <input
+                type="radio"
+                name="theme-dropdown"
+                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                aria-label="Default"
+                value="default"
+                data-set-theme="light"
+              />
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="theme-dropdown"
+                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                aria-label="Dark"
+                value="dark"
+                data-set-theme="dark"
+              />
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="theme-dropdown"
+                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                aria-label="Synthwave"
+                value="synthwave"
+                data-set-theme="synthwave"
+              />
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="theme-dropdown"
+                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                aria-label="Cupcake"
+                value="cupcake"
+                data-set-theme="cupcake"
+              />
+            </li>
+            <li>
+              <input
+                type="radio"
+                name="theme-dropdown"
+                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                aria-label="Sunset"
+                value="sunset"
+                data-set-theme="sunset"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
