@@ -37,24 +37,24 @@ export default function Page() {
       <Navbar />
       <main className="hero flex-1 bg-base-200">
         {user ? (
-          <div className="w-full max-w-md mx-auto flex flex-col items-center text-center p-4 sm:p-6 md:p-8 lg:p-12 space-y-4 sm:space-y-6 md:space-y-8 bg-base-100 rounded-lg shadow-md">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-primary">
+          <div className="w-full max-w-md mx-auto flex flex-col items-center text-center p-4 sm:p-6 md:p-8 lg:p-10 space-y-3 sm:space-y-4 md:space-y-6 bg-base-100 rounded-lg shadow-md">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 text-primary">
               Welcome!
             </h1>
-            <div className="flex flex-col sm:flex-row items-center sm:space-x-4">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-3 md:space-x-4">
               <img
                 src={user.photoURL}
                 alt="User profile"
-                className="rounded-full w-20 h-20 sm:w-24 sm:h-24 shadow-sm mb-4 sm:mb-0"
+                className="rounded-full w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 shadow-sm mb-3 sm:mb-0"
               />
-              <span className="text-lg sm:text-xl text-neutral font-medium">
+              <span className="text-base sm:text-lg md:text-xl text-neutral font-medium">
                 {user.displayName}
               </span>
             </div>
-            <span className="text-md sm:text-lg text-gray-500">
+            <span className="text-sm sm:text-md md:text-lg text-gray-500">
               {user.email}
             </span>
-            <div className="w-full mt-4 sm:mt-6">
+            <div className="w-full mt-4 sm:mt-5 md:mt-6">
               <Status />
             </div>
           </div>
