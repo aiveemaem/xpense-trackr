@@ -73,7 +73,9 @@ export default function NavBar() {
             </ul>
           </div>
         ) : null}
-        <a className="btn btn-ghost text-4xl">XPENSE TRACKR</a>
+        <a className="btn btn-ghost font-bold uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+          XPENSE TRACKR
+        </a>
       </div>
       {user ? (
         <div className="navbar-center hidden lg:flex">
@@ -97,11 +99,11 @@ export default function NavBar() {
         </div>
       ) : null}
       <div className="navbar-end">
-        <div className="dropdown  ">
+        <div className="dropdown">
           <div
             tabIndex={0}
             role="button"
-            className="btn m-1 dropdown-toggle"
+            className="btn btn-sm m-1 dropdown-toggle mr-4  md:btn-sm lg:btn-md xl:btn-md"
             aria-label="Theme Selector"
             onClick={(e) => e.currentTarget.focus()}
           >
@@ -109,7 +111,7 @@ export default function NavBar() {
             <svg
               width="12px"
               height="12px"
-              className="h-2 w-2 fill-current opacity-60 inline-block"
+              className="h-2 w-2 fill-current opacity-60 inline-block sm:w-3 sm:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 2048 2048"
             >
