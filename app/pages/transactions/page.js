@@ -58,10 +58,11 @@ export default function TransactionPage() {
           <div className="flex justify-center">
             <h2 className="text-xl font-semibold mt-4">TRANSACTIONS</h2>
 
-            <div className="fixed bottom-32 right-8 md:bottom-24 md:right-10 lg:bottom-24 lg:right-10">
+            <div className="fixed bottom-24 right-8 md:bottom-24 md:right-10 lg:bottom-24 lg:right-10 z-50">
               <button
-                className="btn btn-circle btn-primary  w-16 h-16 md:w-20 md:h-20"
+                className="tooltip tooltip-left btn btn-circle btn-primary  w-16 h-16 md:w-20 md:h-20 flex items-center justify-center"
                 onClick={() => setOpenTransaction(true)}
+                data-tip="Add new transaction"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
