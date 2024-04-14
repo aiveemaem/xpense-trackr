@@ -1,21 +1,25 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto"; // Import Chart.js library
+import Link from "next/link";
 
 export default function DonutChart({ data, categories }) {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
   useEffect(() => {
-    if (data) {
+    if (data && chartRef.current) {
+      // If there is data, proceed with chart creation
       const labels = categories;
       const values = Object.values(data);
       const ctx = chartRef.current.getContext("2d");
 
+      // Destroy the existing chart instance if it exists
       if (chartInstance.current !== null) {
-        chartInstance.current.destroy(); // Destroy the previous chart instance if it exists
+        chartInstance.current.destroy();
       }
 
+      // Create a new chart instance
       chartInstance.current = new Chart(ctx, {
         type: "doughnut",
         data: {
@@ -51,8 +55,31 @@ export default function DonutChart({ data, categories }) {
           },
         },
       });
+    } else {
+      // If no data or chartRef is null, destroy the chart instance if it exists
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+        chartInstance.current = null;
+      }
     }
   }, [data, categories]);
 
-  return <canvas ref={chartRef} width="400" height="400" />;
+  // Conditionally render the chart canvas or a "No data available" message
+  return (
+    <div>
+      {data && Object.keys(data).length > 0 ? (
+        <canvas ref={chartRef} width="400" height="400" />
+      ) : (
+        <p>
+          No data available. Go to{" "}
+          <Link
+            href="/pages/transactions"
+            className=" text-primary hover:underline"
+          >
+            Transactions
+          </Link>
+        </p>
+      )}
+    </div>
+  );
 }
