@@ -23,7 +23,7 @@ export default function NavBar() {
 
   return (
     <div className="navbar bg-base-100">
-      <div className="navbar-start">
+      <div className="navbar-start flex items-center">
         {user ? (
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -73,9 +73,12 @@ export default function NavBar() {
             </ul>
           </div>
         ) : null}
-        <a className="btn btn-ghost font-bold uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-          XPENSE TRACKR
-        </a>
+
+        <div className="flex-1 lg:flex-none text-center lg:text-left">
+          <a className="btn btn-ghost font-bold uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+            XPENSE TRACKR
+          </a>
+        </div>
       </div>
       {user ? (
         <div className="navbar-center hidden lg:flex">

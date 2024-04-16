@@ -2,16 +2,22 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="footer p-2 bg-neutral text-neutral-content">
-      <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <aside className="flex-1">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* <aside className="flex-1 text-sm md:text-base justify-start ">
           <p className="hidden md:block pl-2">
             © 2024 | Developed by Aivee for CPRG306
           </p>
           <p className="block md:hidden pl-2">
             © 2024 | Developed by Aivee for CPRG306
           </p>
+        </aside> */}
+
+        <aside className="flex flex-1 justify-start">
+          <p className="pl-2 text-sm md:text-base">
+            © 2024 | Developed by Aivee for CPRG306
+          </p>
         </aside>
-        <nav className="flex space-x-0 md:space-x-2 lg:space-x-4">
+        <nav className="flex space-x-2 md:space-x-4 lg:space-x-6">
           <Link
             href="https://github.com/aiveemaem"
             className="btn btn-square btn-ghost"

@@ -72,33 +72,35 @@ export default function NewTransaction({
       onClick={onCloseTransaction}
     >
       <div
-        className="w-full max-w-xl bg-white p-8 rounded-lg shadow-xl"
+        className="w-full max-w-xl bg-base-100 p-8 rounded-lg shadow-xl"
         onClick={(e) => {
           e.stopPropagation(); // prevent click from bubbling up to parent div
         }}
       >
-        <h1 className="text-2xl text-gray-800 font-bold mb-8">
-          Add New Expense
-        </h1>
+        <h1 className="text-2xl font-bold mb-8">Add New Expense</h1>
         <form onSubmit={handleSubmit}>
-          <label className="block mb-4">
-            <span className="text-gray-800">Date:</span>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="text-base-content">Date:</span>
+            </div>
             <input
               type="date"
               required
               onChange={handleDateChange}
               value={date}
-              className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+              className="input input-bordered w-full max-w-xs"
             />
           </label>
 
-          <label className="block mb-4 ">
-            <span className="text-gray-800">Category:</span>
+          <label className="form-control w-full max-w-xs ">
+            <div className="label">
+              <span className="text-base-content">Category:</span>
+            </div>
             <select
               required
               onChange={handleCategoryChange}
               value={category}
-              className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+              className="select select-bordered"
             >
               <option value="">Select a category</option>
               {categories.map((category, index) => (
@@ -109,18 +111,23 @@ export default function NewTransaction({
             </select>
           </label>
 
-          <label className="block mb-4">
-            <span className="text-gray-800">Description:</span>
+          <label className="form-control">
+            <div className="label">
+              <span className="text-base-content">Description:</span>
+            </div>
+
             <textarea
               required
               onChange={handleDescriptionChange}
               value={description}
-              className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+              className="textarea textarea-bordered h-24"
               rows="3"
             />
 
-            <label className="block mb-4">
-              <span className="text-gray-800">Amount:</span>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="text-base-content">Amount:</span>
+              </div>
               <input
                 required
                 type="number"
@@ -128,15 +135,12 @@ export default function NewTransaction({
                 step="0.01"
                 onChange={handleAmountChange}
                 value={amount}
-                className="mt-1 p-1 block w-full rounded-md text-black bg-gray-100 focus:bg-white"
+                className="input input-bordered w-full max-w-xs"
               />
             </label>
           </label>
 
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-500 rounded-md text-white"
-          >
+          <button type="submit" className="w-full btn mt-4">
             Add Expense
           </button>
         </form>
